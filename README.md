@@ -90,6 +90,8 @@ docker-compose up
 
 ![Architecture](https://res.cloudinary.com/dtqnwfxnx/image/upload/v1742490007/image_nirbhay_nluujh.jpg )
 
+### **Note:** email check in spam also. my some message send in spam message
+
 ## **📜 Microservices Overview**
 ## **1. 🚀 GraphQL API Gateway**
 
