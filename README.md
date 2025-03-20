@@ -22,7 +22,7 @@
 
 ## 🛠 Tech Stack
 
-- **Backend:** Node.js, Express.js, GraphQL, REST API  
+- **Backend:** Node.js, Express.js, GraphQL, REST API, Cron job, Kafka monitoring tools  
 - **Authentication:** JWT  
 - **Messaging Queue:** Apache Kafka  
 - **Database:** MongoDB, Redis  
