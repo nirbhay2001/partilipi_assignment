@@ -38,7 +38,7 @@ This project consists of multiple microservices running in separate Docker conta
 
 1. Clone the repository:  
    ```sh
-   git clone <repository-url>
+   git clone <https://github.com/nirbhay2001/partilipi_assignment/tree/main>
    cd <project-folder>
 
 2. Environment Variables 
