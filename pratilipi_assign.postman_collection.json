@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "8465bf6c-d0b2-4bcc-9bc9-dd5c23244da7",
+		"name": "pratilipi_assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34659540"
+	},
+	"item": [
+		{
+			"name": "get_unread_notification",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6000/api/get-notification/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6000",
+					"path": [
+						"api",
+						"get-notification",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order_update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"order_status\": \"Shipped\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/order-update/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"order-update",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "placeorder",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"products\": [\r\n    {\r\n      \"productId\": 3,\r\n      \"title\": \"Mens Cotton Jacket\",\r\n      \"category\": \"men's clothing\"\r\n    },\r\n    {\r\n      \"productId\": 4,\r\n      \"title\": \"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet\",\r\n      \"category\": \"jewelery\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/placedorder/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"placedorder",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDY2NGYwMzIzM2ExMjkxZmExOTkxYyIsImVtYWlsIjoiZ3VwdGFuaXJiaGF5ODZAZ21haWwuY29tIiwiaWF0IjoxNzQyMTAzNzkyLCJleHAiOjE3NDI5Njc3OTJ9.F3ZlFDBAjH20TclFDWu9IIh_JOvI9ZiUHxY71tjVPq4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/user/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"user",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_preferences",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDY2NGYwMzIzM2ExMjkxZmExOTkxYyIsImVtYWlsIjoiZ3VwdGFuaXJiaGF5ODZAZ21haWwuY29tIiwiaWF0IjoxNzQyMTAzNzkyLCJleHAiOjE3NDI5Njc3OTJ9.F3ZlFDBAjH20TclFDWu9IIh_JOvI9ZiUHxY71tjVPq4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"preferences\": [\"promotions\", \"recommendations\",\"order_updates\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/preferences/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"preferences",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userRegisterEndPoint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Nirbhay Gupta\",\r\n  \"email\": \"guptanirbhay86@gmail.com\",\r\n  \"preferences\": [\"order_updates\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recommendationProduct",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/product-recommendation/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"product-recommendation",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "taskScheduleAPI",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"email\":\"guptanirbhay86@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/api/promotion-schedule/67db4955d8a1e9f9e2f6d61e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"promotion-schedule",
+						"67db4955d8a1e9f9e2f6d61e"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
