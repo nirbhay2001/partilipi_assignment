@@ -1,0 +1,20 @@
+{
+  "name": "graphql_gateway",
+  "version": "1.0.0",
+  "main": "graphqlGateway.js",
+  "scripts": {
+    "start": "node graphqlGateway.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "axios": "^1.8.3",
+    "graphql": "^16.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.9",
+    "redis": "^4.7.0"
+  }
+}

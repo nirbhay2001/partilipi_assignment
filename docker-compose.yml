@@ -1,0 +1,202 @@
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+    networks:
+      - pratilipi_network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - pratilipi_network
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "kafka:9092", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest  
+    container_name: kafka-exporter
+    ports:
+      - "9308:9308"
+    command: 
+      - "--kafka.server=kafka:9092"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    networks:
+      - pratilipi_network
+
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - kafka-exporter
+    networks:
+      - pratilipi_network
+  
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - pratilipi_network
+
+  graphqlgateway:
+    build:
+      context: './graphql_gateway'
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    container_name: graphqlgateway
+    environment:
+      - WATCHPACK_POLLING=true
+    networks:
+      - pratilipi_network
+    volumes:
+      - ./graphql_gateway:/app
+    depends_on:
+      - userservice
+      - orderservice
+      - notificationservice
+      - recommendationservice
+      - schedularservice
+    env_file:
+      - ./graphql_gateway/.env  
+
+  userservice:
+    build:
+      context: './user_service'
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: user_service
+    networks:
+      - pratilipi_network
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./user_service:/app
+    env_file:
+      - ./user_service/.env
+    environment:
+      - KAFKA_BROKER=kafka:9092
+
+  orderservice:
+    build:
+      context: './order_service'
+      dockerfile: Dockerfile
+    ports:
+      - "7000:7000"
+    container_name: order_service
+    networks:
+      - pratilipi_network
+    volumes:
+      - ./order_service:/app
+    depends_on:
+      - userservice
+    env_file:
+      - ./order_service/.env
+    environment:
+      - KAFKA_BROKER=kafka:9092
+
+  notificationservice:
+    build:
+      context: './notification_service'
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    container_name: notification_service
+    networks:
+      - pratilipi_network
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./notification_service:/app
+    env_file:
+      - ./notification_service/.env
+    environment:
+      - KAFKA_BROKER=kafka:9092
+
+  recommendationservice:
+    build:
+      context: './recommendation_service'
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: recommendation_service
+    networks:
+      - pratilipi_network
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./recommendation_service:/app
+    env_file:
+      - ./recommendation_service/.env
+    environment:
+      - KAFKA_BROKER=kafka:9092
+    
+  schedularservice:
+    build:
+      context: './scheduler_service'
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    container_name: schedular_service
+    networks:
+      - pratilipi_network
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./schedular_service:/app
+    env_file:
+      - ./scheduler_service/.env
+    environment:
+      - KAFKA_BROKER=kafka:9092
+
+  kafkaadminservice:
+    build:
+      context: './kfka_admin_service'
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: kafka_admin_service
+    networks:
+      - pratilipi_network
+    volumes:
+      - ./kfka_admin_service:/app
+    env_file:
+      - ./kfka_admin_service/.env
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      - KAFKA_BROKER=kafka:9092
+
+networks:
+  pratilipi_network:
+    driver: bridge
