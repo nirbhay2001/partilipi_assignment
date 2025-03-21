@@ -107,6 +107,8 @@ The GraphQL API Gateway acts as a bridge between the client and multiple microse
 🔑 Generates & Verifies JWT Tokens
 ⚙️ Stores & Manages User Preferences
 ![user_service](https://res.cloudinary.com/dgejijgss/image/upload/v1742504551/user_service_kbx94u.jpg)
+![user Registration notification](https://res.cloudinary.com/dgejijgss/image/upload/v1742555255/registartion_notification_bu4ebe.png)
+![purchase product notification](https://res.cloudinary.com/dgejijgss/image/upload/v1742555302/purchase_notification_wsehfh.png)
 ## **3.📦 Order Service**
 The Order Service manages order status updates when a user purchases a product.
 
@@ -117,6 +119,8 @@ The Order Service manages order status updates when a user purchases a product.
 4️⃣ The User Service consumes this message, retrieves user details, and sends order status + email to Kafka.
 5️⃣ The Notification Service consumes the message, saves the data, and sends an email to the user.
 ![order_service](https://res.cloudinary.com/dgejijgss/image/upload/v1742504472/zgec7r50zz7f1ufpacqk.jpg)
+
+![order update notification](https://res.cloudinary.com/dgejijgss/image/upload/v1742555361/order_updates_notification_dcemom.png)
 
 ## **3.🔍 Recommendation Service**
 The Recommendation Service suggests products to users based on their purchase history.
@@ -129,6 +133,8 @@ The Recommendation Service suggests products to users based on their purchase hi
 5️⃣ The Notification Service consumes the message, saves the recommendations in the database, and sends an email to the user.
 ![recommendation_service](https://res.cloudinary.com/dgejijgss/image/upload/v1742504524/recommendation_service_t3xkkt.jpg)
 
+![recommendation product notification](https://res.cloudinary.com/dgejijgss/image/upload/v1742555405/recommendation_product_notification_lga16v.png)
+
 ## **4.⏳ Scheduler Service**
 The Scheduler Service automates promotional product recommendations using cron jobs.
 
@@ -138,6 +144,8 @@ The Scheduler Service automates promotional product recommendations using cron j
 3️⃣ The service sends the promotion data, user ID, and email to a Kafka Broker.
 4️⃣ The Notification Service consumes the message, stores it in the database, and sends an email to the user.
 ![schedule_service](https://res.cloudinary.com/dgejijgss/image/upload/v1742504538/schedule_service_tktyk6.jpg)
+
+![prootion product notification](https://res.cloudinary.com/dgejijgss/image/upload/v1742555448/promotion_product_notification_j3zouz.png)
 ## **5.🔔 Notification Service**
 The Notification Service handles user notifications efficiently.
 
